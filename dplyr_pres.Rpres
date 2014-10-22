@@ -1,0 +1,82 @@
+Using dplyr in ecology
+========================================================
+author: Andrew MacDonald
+date: `r Sys.Date()`
+
+What is dplyr?
+========================================================
+Updated version of `plyr` that focusses on dataframes.
+
+Fast, easy and readable way to manipulate your data.
+
+based on the [Split-Apply-Combine](http://www.jstatsoft.org/v40/i01/paper) appproach to analysis.
+
+Install dplyr
+========================================================
+
+```{r eval=FALSE}
+## install if you do not already have
+
+## from CRAN:
+## install.packages('dplyr')
+
+## from GitHub using devtools (which you also might need to install!):
+devtools::install_github("hadley/lazyeval")
+devtools::install_github("hadley/dplyr")
+```
+
+Ceci c'est le pipe
+========================================================
+![pipe](pipe.jpeg)
+
+`dplyr` imports the pipe from the [`magrittr`](https://github.com/smbache/magrittr) package
+
+How to pipe
+========================================================
+
+The pipe operator is common in many programming languages.
+
+It simply moves the left-hand side to the right-hand side.
+
+This lets you do things one after another:
+
+```{r }
+library(magrittr)
+
+mean(exp(seq(1, 20)))
+
+seq(1, 20) %>% exp %>% mean
+
+```
+
+The Five Verbs
+========================================================
+
+`dplyr` gives us five verbs that together express most of the things a scientist would do:
+
+* `arrange`
+* `select`
+* `filter`
+* `mutate`
+* `summarize`
+
+Examples
+========================================================
+```{r}
+library(dplyr)
+library(lubridate)
+library(tidyr)
+
+spp <- read.table("cardoso_2008_speciesname_clean.txt")
+site <- read.table("cardoso_2008_sites.txt", header = TRUE, sep = "\t")
+```
+
+arrange
+========================================================
+
+```{r}
+spp %>%
+  arrange(name) %>%
+  head
+```
+
